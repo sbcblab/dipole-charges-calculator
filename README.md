@@ -16,15 +16,14 @@ http://sbcb.inf.ufrgs.br
 
 ### CITATION
 
-If you use the dipole charges calculator in a publication, we would appreciate citations to the following paper:
+If you use the dipole charges calculator in a publication, we would appreciate citations to the following papers:
 
-Pablo R. Arantes, Marcelo D. Polêto, Elisa B. O. John, Conrado Pedebos, Bruno I. Grisci, Marcio Dorn, and Hugo Verli. 
+Pablo R. Arantes, Marcelo D. Polêto, Elisa B. O. John, Conrado Pedebos, Bruno I. Grisci, Marcio Dorn, and Hugo Verli. 
 "Development of GROMOS-Compatible Parameter Set for Simulations of Chalcones and Flavonoids" 
 J. Phys. Chem. B, 2019, 123 (5), pp 994–1008
 DOI: https://doi.org/10.1021/acs.jpcb.8b10139
 
 Bibtex entry:
-
 ```
 @article{arantes2019development,
   title={Development of GROMOS-Compatible Parameter Set for Simulations of Chalcones and Flavonoids},
@@ -34,6 +33,23 @@ Bibtex entry:
   volume={123},
   pages={994--1008},
   publisher={ACS Publications}
+}
+```
+
+Marcelo D. Polêto, Victor H. Rusu, Bruno I. Grisci, Marcio Dorn, Roberto D. Lins and Hugo Verli.
+"Aromatic Rings Commonly Used in Medicinal Chemistry: Force Fields Comparison and Interactions With Water Toward the Design of New Chemical Entities"
+Frontiers in pharmacology, v. 9, 2018.
+DOI: https://doi.org/10.3389/fphar.2018.00395
+
+Bibtex entry:
+```
+@article{poleto2018aromatic,
+  title={Aromatic Rings Commonly Used in Medicinal Chemistry: Force Fields Comparison and Interactions With Water Toward the Design of New Chemical Entities},
+  author={Pol{\^e}to, Marcelo D and Rusu, Victor H and Grisci, Bruno I and Dorn, Marcio and Lins, Roberto D and Verli, Hugo},
+  journal={Frontiers in pharmacology},
+  volume={9},
+  year={2018},
+  publisher={Frontiers Media SA}
 }
 ```
 
