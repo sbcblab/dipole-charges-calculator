@@ -6,13 +6,13 @@ Welcome to this repository. Here you will find all the code needed to run the le
 
 This file explains how the dipole-charges derivation is done.
 
-CREATING QM CHARGES
+#### CREATING QM CHARGES
 
 1- Run your QM calculation (MP2/6-31G - ESP) in your software of choice.
 
 #### CREATING SUITABLE INPUT
 
-2- Translate the obtained charges to a .mol2 file. **It is important that the "@<TRIPOS>ATOM" line is present in the .mol2 file, and that there is no empty line between "@<TRIPOS>ATOM" and the first atom**. 
+2- Translate the obtained charges to a .mol2 file. **It is important that the "```@<TRIPOS>ATOM```" line is present in the .mol2 file, and that there is no empty line between "```@<TRIPOS>ATOM```" and the first atom**. 
 **NOTE**: your .mol2 file should be named "example.mol2" (the "example" part can be modified).
 
 Note that atomic charges placed in a cartesian space will generate a dipole moment vector. Since the atomic charges and coordinates were generated from a QM calculation, this "example.mol2" will carry a QM dipole moment vector. Its direction will be a reference for this protocol.
