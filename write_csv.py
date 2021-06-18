@@ -5,23 +5,37 @@ import sys
 import re
 
 arq = sys.argv[1]
-output = arq[0:-9]+ ".csv"
 
-print output
+if arq[-5:] != '.mol2':
+    raise Exception('Input file must be a .mol2')
+
+output = arq.replace('.mol2', '.csv')
 
 # Grepping coordenates and charges
 def convert(arq, output):
 
     f = open(arq, "r")
+    print('Reading file ' + arq)
     l = "text"
 
     f_out = open(output, "w")
 
-    for i in range(8):		#acessing the atoms
+    l = f.readline() 
+    if not l:
+        key = not l
+    else:
+        key = l.strip() != '@<TRIPOS>ATOM'
+    while key:
         l = f.readline()
+        print(l)
+        if not l:
+            key = not l
+        else:
+            key = l.strip() != '@<TRIPOS>ATOM'
 
     while True:
         l = f.readline()
+        print(l)
         if not l: break
         if l.split()[0] == '@<TRIPOS>BOND': break
         if len(l) > 0:
@@ -59,5 +73,6 @@ def convert(arq, output):
 
     f.close()
     f_out.close()
+    print('Saved file ' + output)
 
 convert(arq,output)

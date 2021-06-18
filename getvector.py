@@ -15,6 +15,13 @@ And each line represents an atom.'''
 
 csv_name = sys.argv[1]
 mol2_name = sys.argv[2]
+
+if csv_name[-4:] != '.csv':
+    raise Exception('First file input file must be a .csv')
+
+if mol2_name[-5:] != '.mol2':
+    raise Exception('Second file input file must be a .mol2')
+
 coef = float(sys.argv[3])
 mol_charge = float(sys.argv[4])
 
@@ -44,7 +51,7 @@ fixed = esp[:,2]
 '''If the lower and upper bounds for a charge are equal, i. e., that charge
 value should be constant, a small value is added to the upper charge so the
 algorithm can run.'''
-for bound in xrange(C_lb.size):
+for bound in range(C_lb.size):
         if C_lb[bound] == C_up[bound]:
                 C_up[bound] = C_up[bound] + 0.000001
 
@@ -68,7 +75,7 @@ the marked atom, that is equal 1.0, and the value of its lower bound charge is
 appended at the end of the vector of charges references. This way, when solving
 the linear problem, one of the equations will be
 0 * c0 + 0 * c1 + ... + 1 * cmarked + ... 0 * cn = lb_charge '''
-for flag in xrange(fixed.size):
+for flag in range(fixed.size):
     if fixed[flag] == 1:
         #Creates a new vector with 0.0 in all positions except the position of
         #the flag = 1 and adds it as last row in the POS matrix
@@ -92,7 +99,7 @@ K_ref = K_ref * coef
 C_pred = lsq_linear(POS, K_ref, bounds=(C_lb, C_up), lsmr_tol='auto', verbose=1)
 C_pred = C_pred['x']
 print('Check if charges respect constraints:')
-for i in xrange(len(C_pred)):
+for i in range(len(C_pred)):
     if C_pred[i] >= C_lb[i] and C_pred[i] <= C_up[i]:
         print(str(C_pred[i]) + ' OK!')
     else:
@@ -104,12 +111,22 @@ print('Molecule total charge: ' + str(sum(C_pred)))
 in C_pred, saving the new results in a *-lsql.mol2 file'''
 
 in_f  = open(mol2_name, 'r')
-out_f = open(mol2_name.replace('esp', 'lsql'), 'w')
+out_f = open(mol2_name.replace('.mol2', '-lsql.mol2'), 'w')
 
 # Copy the @<TRIPOS>MOLECULE section
-for i in xrange(8):		#acessing the atoms
-        l = in_f.readline()
-        out_f.write(l)
+l = in_f.readline() 
+if not l:
+    key = not l
+else:
+    key = l.strip() != '@<TRIPOS>ATOM'
+out_f.write(l)    
+while key:
+    l = in_f.readline()
+    if not l:
+        key = not l
+    else:
+        key = l.strip() != '@<TRIPOS>ATOM'
+    out_f.write(l)
 
 # Copy the @<TRIPOS>ATOM section changing the charge value
 for c in C_pred:
@@ -129,3 +146,5 @@ while l:		#acessing the atoms
 
 in_f.close()
 out_f.close()
+
+print('Saved file ' + mol2_name.replace('.mol2', '-lsql.mol2'))
